@@ -6,4 +6,6 @@ import com.example.annotation.demo.model.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
+	Employee findByEmpName(String empName);
+
 }

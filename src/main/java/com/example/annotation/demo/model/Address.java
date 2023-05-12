@@ -3,8 +3,6 @@ package com.example.annotation.demo.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -23,13 +21,28 @@ import lombok.Setter;
 @Getter
 public class Address {
 	
-//	case i
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="Id")
 	private long Id;
 	private String street;
 	private String city;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	@OneToOne(mappedBy = "address")   bidirectional mapping
+//	private Student student;
+	
 	/*
 	 * The address side of the relationship is called the non-owning side.
 	 */

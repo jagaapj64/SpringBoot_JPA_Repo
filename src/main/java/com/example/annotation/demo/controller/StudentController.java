@@ -1,13 +1,17 @@
 package com.example.annotation.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.annotation.demo.model.Student;
 import com.example.annotation.demo.service.StudentService;
 
 @RestController
@@ -28,19 +32,13 @@ public class StudentController {
 	 * 
 	 * http://localhost:8080/apiPath/firstName/bob/lastName/smith/middleName/joe
 	 */		
-	@PostMapping("/save/student/{name}/{city}/{street}")
-	public ResponseEntity<?> saveStudent(@PathVariable(value = "name") String name,
-			@PathVariable(value = "city") String city, @PathVariable(value = "street") String street) {
-		return ResponseEntity.ok(studentService.saveStudent(name, city, street));
+	@PostMapping("/save/student/")
+	public ResponseEntity<?> saveStudent(@RequestBody List<Student> dto) {
+		return ResponseEntity.ok(studentService.saveStudent(dto));
 
 	}
 
-	@PostMapping("/save1/student1/{name}/{city}/{street}")
-	public ResponseEntity<?> saveStudent1(@PathVariable(value = "name") String name,
-			@PathVariable(value = "city") String city, @PathVariable(value = "street") String street) {
-		return ResponseEntity.ok(studentService.saveStudent1(name, city, street));
-
-	}
+	
 
 	
 	@GetMapping("/get/student/{Id}")

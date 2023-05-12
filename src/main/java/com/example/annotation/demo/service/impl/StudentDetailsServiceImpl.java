@@ -13,7 +13,6 @@ import com.example.annotation.demo.model.CourseDetails;
 import com.example.annotation.demo.model.StudentDetails;
 import com.example.annotation.demo.repo.CourseDetailsRepository;
 import com.example.annotation.demo.repo.StudentDetailsRepository;
-import com.example.annotation.demo.request.StudentCourse;
 import com.example.annotation.demo.request.StudentCourseDto;
 import com.example.annotation.demo.service.StudentDetailsService;
 
@@ -27,26 +26,31 @@ public class StudentDetailsServiceImpl implements StudentDetailsService {
 	StudentDetailsRepository studentDetailsRepository;
 	
 	@Override
-	public ResponseEntity<?> saveStudentDetails(StudentCourse studentCourse) {
-		    CourseDetails courseDetails1=CourseDetails.builder().courseName(studentCourse.getCourse1()).build();
-		    CourseDetails courseDetails2=CourseDetails.builder().courseName(studentCourse.getCourse2()).build();
-		    Set<CourseDetails> setCourse=new HashSet<CourseDetails>();
-		    setCourse.add(courseDetails1);
-		    setCourse.add(courseDetails2);
+	public ResponseEntity<?> saveStudentDetails(StudentDetails studentDetails) {
+		  Set<CourseDetails> setCourse=new HashSet<CourseDetails>();
+		 
+		  studentDetails.getCourseDetails().forEach(role->
+		  setCourse.add(CourseDetails.builder().courseId(role.getCourseId()).courseName(role.getCourseName()).build()));
+//		    CourseDetails courseDetails2=CourseDetails.builder().courseName(studentCourse.getCourse2()).build();
+//		    Set<CourseDetails> setCourse=new HashSet<CourseDetails>();
+//		    setCourse.add(courseDetails1);
+//		    setCourse.add(courseDetails2);
+//		    
+		    StudentDetails studentDetails1=StudentDetails.builder().studentName(studentDetails.getStudentName()).courseDetails(setCourse).build();
+//            StudentDetails studentDetails2=StudentDetails.builder().studentName(studentCourse.getStudent2()).build();
+//		    Set<StudentDetails> setStudent=new HashSet<StudentDetails>();
+//		    setStudent.add(studentDetails1);
+//		    setStudent.add(studentDetails2);
+//            
+//		   
+//		    studentDetails1.setCourseDetails(setCourse);
+//		    studentDetails2.setCourseDetails(setCourse);
+//		    
+//		    courseDetails1.setStudentDetails(setStudent);
+//		    courseDetails2.setStudentDetails(setStudent);
+//		    
 		    
-		    StudentDetails studentDetails1=StudentDetails.builder().studentName(studentCourse.getStudent1()).build();
-            StudentDetails studentDetails2=StudentDetails.builder().studentName(studentCourse.getStudent2()).build();
-		    Set<StudentDetails> setStudent=new HashSet<StudentDetails>();
-		    setStudent.add(studentDetails1);
-		    setStudent.add(studentDetails2);
-            
-		    studentDetails2.setCourseDetails(setCourse);
-		    studentDetails1.setCourseDetails(setCourse);
-		    
-		    courseDetails2.setStudentDetails(setStudent);
-		    courseDetails1.setStudentDetails(setStudent);
-		    
-            studentDetailsRepository.saveAll(setStudent);     
+            studentDetailsRepository.save(studentDetails1);     
             return ResponseEntity.ok(studentDetailsRepository.findAll());
 	}
 

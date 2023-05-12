@@ -13,8 +13,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,7 +35,8 @@ public class StudentDetails {
 	@Column(name = "student_name")
 	private String studentName;
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "student_and_course_details", joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id"))
-	@JsonManagedReference
+	@JoinTable(name = "student_course_details", joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "student_id"),
+	                                     inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id"))
+//	@JsonManagedReference
 	private Set<CourseDetails> courseDetails;
 }

@@ -2,29 +2,26 @@ package com.example.annotation.demo.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Table(name="card_details")
+@Table(name = "state_chess_board")
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
-public class Card {
+public class StateBoard {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="card_id")
-	private long cardId;
-	private String ownerName;
+	@Column(name="sid")
+	private int sid;
+	private String boardName;
+	private String state;
+
 }

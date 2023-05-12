@@ -27,7 +27,7 @@ public class Student {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="student_id")
+	@Column(name="student_Id")
 	private long studentId;
 	private String studentName;
 	@OneToOne(cascade = CascadeType.ALL)

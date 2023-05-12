@@ -1,14 +1,14 @@
 package com.example.annotation.demo.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name="work_station_details")
+@Table(name="work_station")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,11 +27,18 @@ public class WorkStation {
 
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="station_id")
 	private long stationId;
 	private String floor;
-	@OneToOne(mappedBy = "workStation")
-	@JsonIgnore
+	private String branch;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="emp_Id")
 	private Employee employee;
+	
+	/*
+	 * The direction of a relationship can be either bidirectional or
+	 * unidirectional. A bidirectional relationship has both an owning side and an
+	 * inverse side. A unidirectional relationship has only an owning side.
+	 */
 }

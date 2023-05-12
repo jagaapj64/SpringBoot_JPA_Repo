@@ -1,5 +1,6 @@
 package com.example.annotation.demo.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,20 +15,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="address1_details")
+@Table(name="user_profile")
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class Address1 {
+public class UserProfile {
 
 	@Id
-	@Column(name="student_id")
-	private long Id;
-	private String street;
-	private String city;
-	@OneToOne
+	@Column(name="user_Id")
+	private Long userId;
+	private String email;
+
+	@OneToOne(cascade = CascadeType.ALL)
 	@MapsId
-	@JoinColumn(name="student_id")
-	private Student1 student1;
+	private User user;
 }
